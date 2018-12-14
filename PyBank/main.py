@@ -1,6 +1,4 @@
 #JLT HW3 PyBank
-#fix greatest Inc/Dec month, typo on line 49 makes it work for Inc month
-#format line 65 to dollars not working "${:0,.2f}"
 
 #imports
 import os
@@ -21,16 +19,13 @@ with open(budget_data, newline = "") as csvfile:
     change = []
     greatestInc = 0
     greatestDec = 0 
-    #teacher had firstrow = next(csvreader) which gave ['Jan-2010', '867884']
+    greatestIncmnth = []
+    greatestDecmnth = []
 
     for row in csvreader:
-        #totalMonths = len(list(csvreader))+1
-        #print(totalMonths)
 
         #set variables
         month = row[0]
-        greatestIncmnth = row[0]
-        greatestDecmnth = row[0]
 
         #total months
         totalMonths = totalMonths + 1
@@ -46,7 +41,7 @@ with open(budget_data, newline = "") as csvfile:
             greatestIncmnth = greatestIncmnth
         else: 
             greatestInc = plchange 
-            greatIncmnth = month
+            greatestIncmnth = month
 
         if plchange < greatestDec:
             greatestDec = plchange
@@ -62,7 +57,7 @@ with open(budget_data, newline = "") as csvfile:
     change = change[1:]
 
     #cal avg
-    plavg = sum(change)/len(change)
+    plavg = "${:0,.2f}".format(sum(change)/len(change))
 
 #prints to chk wk
 # print(totalpl)
@@ -71,8 +66,8 @@ with open(budget_data, newline = "") as csvfile:
 # print(plavg)
 # print(greatestInc)
 # print(greatestDec)
-print(greatestIncmnth)
-print(greatestDecmnth) 
+# print(greatestIncmnth)
+# print(greatestDecmnth) 
 
 #output
 print(f"Financial Analysis")
@@ -80,7 +75,7 @@ print(f"----------")
 print(f"Total Months: {totalMonths}")
 print(f"Total: ${totalpl}")
 print(f"Average Change: {plavg}")
-print(f"Greatest Increase in Profits: {greatIncmnth} (${greatestInc})")
+print(f"Greatest Increase in Profits: {greatestIncmnth} (${greatestInc})")
 print(f"Greatest Decrease in Profits: {greatestDecmnth} (${greatestDec})")
 
 #put output in list
